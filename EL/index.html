@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E.A.C Insurance - Welcome</title>
+    <title>E.A.C Insurance - Καλώς Ήρθατε</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+        :root {
+            /* Brand Colors extracted from main.css */
+            --brand-gold: #BC9042;
+            --brand-gold-dark: #A8742D;
+            --brand-gold-light: #D4A855;
+            --brand-dark: #222222;
+            --bg-light: #fbfbfb;
+        }
 
         * {
             margin: 0;
@@ -19,9 +28,8 @@
         }
 
         body {
-            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Very light grey, almost white */
-            background: #f9f9f9;
+            font-family: 'Open Sans', sans-serif;
+            background: var(--bg-light);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -36,10 +44,10 @@
             align-items: center;
             justify-content: space-between;
             z-index: 9999;
-            transition: opacity 0.5s ease-out;
+            transition: opacity 0.8s ease-out;
             padding: 8vh 2vw;
-            transform-origin: center center;
-            transform: scale(0.75);
+            /* Subtle warm gradient background for premium feel */
+            background: radial-gradient(circle at center, #ffffff 0%, #f4f1ea 100%);
         }
 
         .loader-container.fade-out {
@@ -47,77 +55,41 @@
             pointer-events: none;
         }
 
-        /* Gold gradient overlay */
+        /* Elegant Gold Mesh Overlay */
         .gradient-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(193, 154, 107, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(193, 154, 107, 0.10) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(224, 201, 167, 0.08) 0%, transparent 60%);
-            animation: gradientShift 8s ease-in-out infinite;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(188, 144, 66, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(168, 116, 45, 0.05) 0%, transparent 50%);
             pointer-events: none;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        /* Gold scanlines */
-        .scanlines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(193, 154, 107, 0.05) 0px,
-                transparent 1px,
-                transparent 2px,
-                rgba(193, 154, 107, 0.05) 3px
-            );
-            animation: scanlineMove 10s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes scanlineMove {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(10px); }
-        }
-
-        /* Gold floating particles */
-        .quantum-particles {
+        /* Gold Dust Particles */
+        .gold-dust-container {
             position: absolute;
             width: 100%;
             height: 100%;
             pointer-events: none;
+            overflow: hidden;
         }
 
-        .quantum-particle {
+        .gold-speck {
             position: absolute;
-            width: 0.6vmin;
-            height: 0.6vmin;
-            background: radial-gradient(circle, rgba(193, 154, 107, 0.6), rgba(224, 201, 167, 0.3));
+            background: var(--brand-gold);
             border-radius: 50%;
-            animation: quantumFloat 10s ease-in-out infinite;
-            box-shadow: 0 0 1.5vmin rgba(193, 154, 107, 0.5);
+            opacity: 0.4;
+            animation: floatUp 15s linear infinite;
         }
 
-        .quantum-particle:nth-child(1) { left: 20%; top: 25%; animation-delay: 0s; }
-        .quantum-particle:nth-child(2) { left: 80%; top: 35%; animation-delay: 2s; }
-        .quantum-particle:nth-child(3) { left: 30%; top: 65%; animation-delay: 4s; }
-        .quantum-particle:nth-child(4) { left: 70%; top: 70%; animation-delay: 6s; }
-        .quantum-particle:nth-child(5) { left: 50%; top: 15%; animation-delay: 8s; }
-
-        @keyframes quantumFloat {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
-            33% { transform: translateY(-2vh) scale(1.2); opacity: 1; }
-            66% { transform: translateY(1vh) scale(0.8); opacity: 0.8; }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
         }
 
         /* Top section - Company branding */
@@ -125,42 +97,45 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: fadeInDown 1.5s ease-out;
+            animation: fadeInDown 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
             flex: 0 0 auto;
             text-align: center;
+            z-index: 2;
         }
 
         .company-name {
-            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #222222;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--brand-dark);
             font-size: clamp(1.8rem, 4vw, 3.2rem);
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
-            letter-spacing: 0.1em;
-            text-shadow: 0 0 1.5vmin rgba(193, 154, 107, 0.3);
+            letter-spacing: 0.02em;
             line-height: 1.2;
-            animation: textShimmer 3s ease-in-out infinite;
-            margin-bottom: 1vh;
+            margin-bottom: 1.5vh;
             max-width: 90vw;
         }
 
         .tagline {
-            color: rgba(193, 154, 107, 1);
-            font-size: clamp(1rem, 2.2vw, 1.8rem);
+            color: var(--brand-gold);
+            font-size: clamp(1rem, 2vw, 1.5rem);
             text-align: center;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-shadow: 0 0 1vmin rgba(193, 154, 107, 0.4);
+            font-weight: 600;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
+            position: relative;
+            padding-bottom: 10px;
         }
 
-        @keyframes textShimmer {
-            0%, 100% {
-                text-shadow: 0 0 1.5vmin rgba(193, 154, 107, 0.3);
-            }
-            50% {
-                text-shadow: 0 0 3vmin rgba(193, 154, 107, 0.6);
-            }
+        /* Elegant underline for tagline */
+        .tagline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background-color: var(--brand-gold-dark);
         }
 
         /* Center section - Logo */
@@ -169,8 +144,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            animation: logoEntrance 2s ease-out 0.3s both;
+            animation: zoomIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s both;
             flex: 0 1 auto;
+            z-index: 2;
         }
 
         .logo-container {
@@ -178,88 +154,50 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: clamp(20rem, 35vmin, 45rem);
-            height: clamp(20rem, 35vmin, 45rem);
+            width: clamp(18rem, 30vmin, 35rem);
+            height: clamp(18rem, 30vmin, 35rem);
             background: #ffffff;
-            border: 0.3vmin solid rgba(193, 154, 107, 0.4);
-            border-radius: 2vmin;
-            box-shadow: 
-                0 5px 25px rgba(193, 154, 107, 0.15),
-                0 0 40px rgba(193, 154, 107, 0.1);
-            animation: logoPulse 4s ease-in-out infinite;
+            border-radius: 50%; /* Circle feels more premium */
+            box-shadow:
+                0 15px 35px rgba(188, 144, 66, 0.15),
+                0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 40px;
         }
 
-        .logo-container::before {
+        /* Animated Gold Ring */
+        .logo-ring {
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--brand-gold);
+            border-bottom-color: var(--brand-gold-light);
+            animation: spin 3s linear infinite;
+            opacity: 0.6;
+        }
+
+        .logo-ring::before {
             content: '';
             position: absolute;
-            top: -0.3vmin;
-            left: -0.3vmin;
-            right: -0.3vmin;
-            bottom: -0.3vmin;
-            background: linear-gradient(45deg,
-                rgba(193, 154, 107, 0.6),
-                rgba(224, 201, 167, 0.4),
-                rgba(193, 154, 107, 0.6),
-                rgba(224, 201, 167, 0.4),
-                rgba(193, 154, 107, 0.6)
-            );
-            border-radius: 2.2vmin;
-            animation: borderRotate 6s linear infinite;
-            z-index: -1;
-        }
-
-        @keyframes borderRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes logoPulse {
-            0%, 100% {
-                box-shadow: 
-                    0 5px 25px rgba(193, 154, 107, 0.15),
-                    0 0 40px rgba(193, 154, 107, 0.1);
-                border-color: rgba(193, 154, 107, 0.4);
-            }
-            50% {
-                box-shadow: 
-                    0 8px 35px rgba(193, 154, 107, 0.25),
-                    0 0 60px rgba(193, 154, 107, 0.2);
-                border-color: rgba(193, 154, 107, 0.7);
-            }
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-left-color: var(--brand-gold-dark);
+            border-right-color: var(--brand-gold);
+            animation: spinReverse 4s linear infinite;
+            opacity: 0.4;
         }
 
         .logo-container img {
-            width: 85%;
-            height: 85%;
+            width: 80%;
+            height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 1.5vmin rgba(193, 154, 107, 0.4));
-            transition: all 0.3s ease;
-        }
-
-        .logo-container img:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 2vmin rgba(193, 154, 107, 0.6));
-        }
-
-        /* Fallback for when logo is not available */
-        .logo-placeholder {
-            width: 85%;
-            height: 85%;
-            background: linear-gradient(135deg,
-                rgba(193, 154, 107, 0.3) 0%,
-                rgba(224, 201, 167, 0.2) 50%,
-                rgba(193, 154, 107, 0.3) 100%
-            );
-            border: 0.1vmin solid rgba(193, 154, 107, 0.5);
-            border-radius: 1.5vmin;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(193, 154, 107, 1);
-            font-size: clamp(2rem, 5vmin, 4rem);
-            font-weight: bold;
-            letter-spacing: 0.2em;
-            text-shadow: 0 0 1vmin rgba(193, 154, 107, 0.5);
         }
 
         /* Bottom section - Progress and contact */
@@ -267,156 +205,91 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            animation: fadeInUp 1.5s ease-out 0.6s both;
+            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s both;
             flex: 0 0 auto;
+            width: 100%;
+            z-index: 2;
         }
 
         .progress-container {
             width: clamp(20rem, 50vw, 35rem);
-            margin-bottom: 3vh;
+            margin-bottom: 2vh;
         }
 
         .progress-bar {
             width: 100%;
-            height: 0.8vmin;
-            background: linear-gradient(90deg,
-                rgba(193, 154, 107, 0.1),
-                rgba(224, 201, 167, 0.15),
-                rgba(193, 154, 107, 0.1)
-            );
-            border-radius: 0.4vmin;
+            height: 4px;
+            background: rgba(188, 144, 66, 0.2);
+            border-radius: 2px;
             overflow: hidden;
             position: relative;
-            border: 0.1vmin solid rgba(193, 154, 107, 0.4);
-            box-shadow: 
-                0 0 1.5vmin rgba(193, 154, 107, 0.2),
-                inset 0 0 1vmin rgba(193, 154, 107, 0.1);
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg,
-                rgba(193, 154, 107, 0.9) 0%,
-                rgba(224, 201, 167, 1) 50%,
-                rgba(193, 154, 107, 0.9) 100%);
-            border-radius: 0.4vmin;
+            background: linear-gradient(90deg, var(--brand-gold-dark), var(--brand-gold), var(--brand-gold-light));
             width: 0%;
-            animation: progressFill 4.5s ease-out forwards;
-            position: relative;
-            box-shadow: 0 0 2.5vmin rgba(193, 154, 107, 0.7);
-        }
-
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-            animation: progressSweep 2.5s ease-in-out infinite;
-        }
-
-        @keyframes progressSweep {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .progress-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 1.5vmin;
-            margin: 2vh 0;
-        }
-
-        .progress-dot {
-            width: 1.2vmin;
-            height: 1.2vmin;
-            background: rgba(193, 154, 107, 0.3);
-            border-radius: 50%;
-            border: 0.1vmin solid rgba(193, 154, 107, 0.4);
-            animation: dotActivate 4.5s ease-out forwards;
-            box-shadow: 0 0 1vmin rgba(193, 154, 107, 0.3);
-        }
-
-        .progress-dot:nth-child(1) { animation-delay: 0.5s; }
-        .progress-dot:nth-child(2) { animation-delay: 1.2s; }
-        .progress-dot:nth-child(3) { animation-delay: 2.0s; }
-        .progress-dot:nth-child(4) { animation-delay: 2.8s; }
-        .progress-dot:nth-child(5) { animation-delay: 3.5s; }
-
-        @keyframes dotActivate {
-            to {
-                background: rgba(193, 154, 107, 1);
-                border-color: rgba(224, 201, 167, 1);
-                box-shadow: 0 0 2vmin rgba(193, 154, 107, 1);
-            }
+            animation: progressFill 4.5s ease-in-out forwards;
+            box-shadow: 0 0 10px rgba(188, 144, 66, 0.4);
         }
 
         .status-text {
-            color: #222222;
-            font-size: clamp(1rem, 2.5vw, 1.8rem);
+            color: var(--brand-dark);
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
             text-align: center;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            margin-bottom: 2vh;
+            font-weight: 600;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            text-shadow: 0 0 1vmin rgba(193, 154, 107, 0.3);
+            margin-bottom: 3vh;
+            min-height: 1.5em;
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1vh;
+            gap: 0.5vh;
             text-align: center;
         }
 
         .contact-primary {
-            color: rgba(193, 154, 107, 1);
-            font-size: clamp(0.9rem, 2.2vw, 1.6rem);
-            font-weight: 600;
-            text-shadow: 0 0 1vmin rgba(193, 154, 107, 0.5);
-            letter-spacing: 0.03em;
+            color: var(--brand-gold-dark);
+            font-size: clamp(1rem, 1.8vw, 1.4rem);
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .contact-secondary {
-            font-size: clamp(0.8rem, 1.8vw, 1.4rem);
-            color: #444444;
-            text-shadow: none;
+            font-size: clamp(0.8rem, 1.2vw, 1rem);
+            color: #666;
+            font-weight: 400;
         }
 
-        @keyframes logoEntrance {
-            from {
-                opacity: 0;
-                transform: translateY(3vh) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+        /* Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes spinReverse {
+            0% { transform: rotate(360deg); }
+            100% { transform: rotate(0deg); }
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-3vh);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(3vh);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         @keyframes progressFill {
@@ -424,37 +297,23 @@
             100% { width: 100%; }
         }
 
-        @media (orientation: landscape) and (max-height: 600px) {
-            .logo-container {
-                width: clamp(12rem, 25vmin, 25rem);
-                height: clamp(12rem, 25vmin, 25rem);
-            }
-        }
-
     </style>
 </head>
 <body>
     <div class="loader-container" id="loader">
         <div class="gradient-overlay"></div>
-        <div class="scanlines"></div>
 
-        <div class="quantum-particles">
-            <div class="quantum-particle"></div>
-            <div class="quantum-particle"></div>
-            <div class="quantum-particle"></div>
-            <div class="quantum-particle"></div>
-            <div class="quantum-particle"></div>
-        </div>
+        <div class="gold-dust-container" id="dust-container">
+            </div>
 
         <div class="top-section">
-            <h1 class="company-name">E.A.C Insurance Agencies & Consultants LTD</h1>
-            <p class="tagline">Different Because We Care</p>
+            <p class="tagline">Διαφορετικοί Γιατί Νοιαζόμαστε</p>
         </div>
 
         <div class="center-section">
             <div class="logo-container">
-                <img src="assets/img/logo_gray.png" alt="E.A.C Insurance Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-placeholder" style="display: none;">EAC</div>
+                <div class="logo-ring"></div>
+                <img src="../assets/img/logo_gray.png" alt="E.A.C Insurance Logo">
             </div>
         </div>
 
@@ -463,20 +322,13 @@
                 <div class="progress-bar">
                     <div class="progress-fill"></div>
                 </div>
-                <div class="progress-indicators">
-                    <div class="progress-dot"></div>
-                    <div class="progress-dot"></div>
-                    <div class="progress-dot"></div>
-                    <div class="progress-dot"></div>
-                    <div class="progress-dot"></div>
-                </div>
             </div>
 
-            <div class="status-text">Loading Premium Solutions...</div>
+            <div class="status-text">Φόρτωση Λύσεων Premium...</div>
 
             <div class="contact-info">
-                <div class="contact-primary">Direct Line: +357 96660113</div>
-                <div class="contact-secondary">Available 24/7 for Claims & Emergencies</div>
+                <div class="contact-primary">+357 96 660 113</div>
+                <div class="contact-secondary">Άμεση Πρόσβαση • Υποστήριξη 24/7</div>
             </div>
         </div>
     </div>
@@ -485,51 +337,64 @@
         const loader = document.getElementById('loader');
         const statusText = document.querySelector('.status-text');
 
+        // Generate Gold Dust
+        const dustContainer = document.getElementById('dust-container');
+        for(let i = 0; i < 15; i++) {
+            const speck = document.createElement('div');
+            speck.classList.add('gold-speck');
+
+            // Random size between 2px and 5px
+            const size = Math.random() * 3 + 2;
+            speck.style.width = `${size}px`;
+            speck.style.height = `${size}px`;
+
+            // Random position
+            speck.style.left = `${Math.random() * 100}%`;
+            speck.style.top = `${Math.random() * 100}%`;
+
+            // Random animation delay
+            speck.style.animationDelay = `${Math.random() * 5}s`;
+            speck.style.animationDuration = `${10 + Math.random() * 10}s`;
+
+            dustContainer.appendChild(speck);
+        }
+
         const professionalMessages = [
-            'Loading Premium Solutions...',
-            'Connecting to Secure Systems...',
-            'Welcome to E.A.C Insurance'
+            'Επαλήθευση Επιλογών Κάλυψης...',
+            'Προσγείωση στο Μέλλον των Ασφαλειών...',
+            'Προετοιμασία της Εμπειρίας Σας...'
         ];
 
         let messageIndex = 0;
 
         const updateMessage = () => {
-            if (messageIndex < professionalMessages.length - 1) {
-                messageIndex++;
-                statusText.textContent = professionalMessages[messageIndex];
-                setTimeout(updateMessage, 1500);
+            if (messageIndex < professionalMessages.length) {
+                // Smooth fade text
+                statusText.style.opacity = 0;
+                setTimeout(() => {
+                    statusText.textContent = professionalMessages[messageIndex];
+                    statusText.style.opacity = 1;
+                    messageIndex++;
+                }, 300);
+                setTimeout(updateMessage, 1400);
             }
         };
 
-        setTimeout(updateMessage, 1500);
+        setTimeout(updateMessage, 1000);
 
         // Redirect after 4.5 seconds
         setTimeout(() => {
             loader.classList.add('fade-out');
             setTimeout(() => {
                 window.location.href = 'main.html';
-            }, 500);
+            }, 800);
         }, 4500);
 
-        // Skip with Escape key (development)
+        // Skip with Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 window.location.href = 'main.html';
             }
-        });
-
-        // Enhanced particle interaction
-        document.addEventListener('mousemove', (e) => {
-            const particles = document.querySelectorAll('.quantum-particle');
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-
-            particles.forEach((particle, index) => {
-                const intensity = (index + 1) * 0.3;
-                const x = mouseX * intensity * 8;
-                const y = mouseY * intensity * 8;
-                particle.style.transform = `translate(${x}px, ${y}px)`;
-            });
         });
     </script>
 </body>

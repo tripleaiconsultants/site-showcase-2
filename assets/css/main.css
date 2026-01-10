@@ -1751,36 +1751,165 @@ section,
   margin-bottom: 0;
 }
 
-/* About Video Styles */
-.about .video-container {
+/* Overlapping Image Collage */
+.about .image-collage {
   position: relative;
   width: 100%;
-  max-width: 350px; /* Limit width for vertical video */
-  margin: 0 auto; /* Center it */
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  background: #000;
-  overflow: hidden;
+  height: 500px;
+  margin: 20px 0;
 }
 
-.about .about-video {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  aspect-ratio: 9 / 16; /* Vertical/portrait video ratio */
+.about .collage-bg {
+  position: absolute;
+  width: 75%;
+  height: 75%;
   object-fit: cover;
-  background: #000;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  z-index: 1;
 }
 
-.about .about-video:focus {
-  outline: none;
+.about .collage-overlay {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 4px solid #BC9042;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Responsive adjustments for vertical video */
+.about .collage-overlay:hover {
+  transform: scale(1.03);
+  box-shadow: 0 20px 60px rgba(188, 144, 66, 0.4);
+}
+
+/* Overlay positioning variants */
+.about .overlay-topright {
+  top: 0;
+  right: 0;
+}
+
+.about .overlay-bottomleft {
+  bottom: 0;
+  left: 0;
+}
+
+.about .overlay-bottomright {
+  bottom: 0;
+  right: 0;
+}
+
+/* Collage alignment */
+.about .collage-left .collage-bg {
+  top: 50px;
+  left: 0;
+}
+
+.about .collage-right .collage-bg {
+  top: 50px;
+  right: 0;
+}
+
+/* Add clickable lightbox effect */
+.about .image-collage img {
+  cursor: pointer;
+}
+
+/* Content spacing */
+.about .about-content {
+  padding-top: 20px;
+}
+
+.about .about-content h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--heading-color);
+}
+
+.about .about-content h3 i {
+  font-size: 1.5rem;
+}
+
+.about .about-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: var(--default-color);
+}
+
+.about .about-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 25px 0;
+}
+
+.about .about-content ul li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(188, 144, 66, 0.05);
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.about .about-content ul li:hover {
+  background: rgba(188, 144, 66, 0.1);
+}
+
+.about .about-content ul li i {
+  font-size: 1.5rem;
+  color: #BC9042;
+  margin-right: 15px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .about .image-collage {
+    height: 400px;
+    margin: 40px auto;
+    max-width: 500px;
+  }
+
+  .about .collage-bg {
+    width: 70%;
+    height: 70%;
+  }
+
+  .about .collage-overlay {
+    width: 55%;
+    height: 55%;
+  }
+}
+
 @media (max-width: 768px) {
-  .about .video-container {
-    max-width: 280px;
+  .about .image-collage {
+    height: 350px;
+    max-width: 400px;
+  }
+
+  .about .collage-bg {
+    width: 80%;
+    height: 80%;
+  }
+
+  .about .collage-overlay {
+    width: 60%;
+    height: 60%;
+    border-width: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about .image-collage {
+    height: 300px;
+    max-width: 320px;
   }
 }
 
