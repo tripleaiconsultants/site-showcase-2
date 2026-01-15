@@ -3255,7 +3255,9 @@ div#bp-web-widget-container {
  * FIXED: Removed transform to allow fixed positioning of chat/popups
  */
 body.index-page,
-body.healt-page {
+body.home-page,
+body.motor-page,
+body.business-page {
   opacity: 0; 
   animation: pageFadeIn 1.5s ease-out forwards;
 }
