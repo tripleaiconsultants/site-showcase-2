@@ -975,6 +975,8 @@
 
   <!-- Chat Bubble Script -->
   <script>
+    let hasOpenedChat = sessionStorage.getItem('hasOpenedChat') === 'true';
+
     const createChatBubble = () => {
       if (document.getElementById("custom-chat-bubble")) {
         return;
@@ -984,18 +986,26 @@
       bubble.id = "custom-chat-bubble";
       bubble.className = "custom-chat-bubble";
       bubble.innerText = "Εδώ για να σας βοηθήσω!";
+      bubble.style.display = hasOpenedChat ? 'none' : 'block';
 
       document.body.appendChild(bubble);
 
       bubble.addEventListener('click', () => {
         window.botpress.open();
+        hasOpenedChat = true;
+        sessionStorage.setItem('hasOpenedChat', 'true');
       });
 
       window.botpress.on('webchat:opened', () => {
         bubble.style.display = 'none';
+        hasOpenedChat = true;
+        sessionStorage.setItem('hasOpenedChat', 'true');
       });
       window.botpress.on('webchat:closed', () => {
-        bubble.style.display = 'block';
+        // Don't show bubble again after first interaction
+        if (!hasOpenedChat) {
+          bubble.style.display = 'block';
+        }
       });
     };
 
@@ -1007,7 +1017,7 @@
             createChatBubble();
           } else {
             const bubbleEl = document.getElementById('custom-chat-bubble');
-            bubbleEl.style.display = 'block';
+            bubbleEl.style.display = hasOpenedChat ? 'none' : 'block';
             bubbleEl.classList.remove('no-animations');
           }
           document.body.classList.remove('no-chat-animations', 'chat-unavailable');
