@@ -1549,10 +1549,12 @@ section,
 
 .hero h1 span {
   color: var(--hero-color);
-  background: inherit;
+  background: linear-gradient(135deg, var(--hero-color, #111) 0%, var(--accent-color) 60%, #8B6F47 100%);
+  background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: gradientShift 4s ease infinite;
 }
 
 .hero p {
